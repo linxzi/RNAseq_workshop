@@ -29,12 +29,13 @@ def count_kmers(kmer_list):
     ##################
     ## Step 2:
     ## begin your code
-
-
-
-
-
-
+    
+    for item in kmer_list:
+        for kmer in item:
+            if kmer in kmer_count_dict:
+                kmer_count_dict[kmer] += 1
+            else:
+                kmer_count_dict[kmer] = 1
 
 
     ## end your code
@@ -69,11 +70,9 @@ def main():
     ## begin your code, populate 'all_kmers' list with the
     ## collection of kmers from all sequences
 
-
-
-
-
-
+    for seq in seq_list:
+        all_kmers.append(sequence_to_kmer_list(seq,kmer_length))
+        #print(all_kmers)
 
 
     ## end your code
@@ -90,14 +89,8 @@ def main():
     ## (Note, you can run and test without first implementing Step 3)
     ## begin your code       hint: see the built-in 'sorted' method documentation
 
-
-
-
-
-
-
-
-
+    kmer_count_dict = dict(sorted(kmer_count_dict.items(), key=lambda item: item[1],reverse=True))
+    unique_kmers = list(kmer_count_dict.keys())
 
     ## end your code
 

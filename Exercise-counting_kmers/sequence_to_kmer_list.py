@@ -29,9 +29,12 @@ def sequence_to_kmer_list(sequence, kmer_length):
 
     ## begin your code
 
+    kmer_length = int(kmer_length)
+    n = 0
 
-
-
+    for n in range(len(sequence) - kmer_length+1):
+        kmers_list.append(sequence[n:n+kmer_length])
+        n += 1
     
     ## end your code
 

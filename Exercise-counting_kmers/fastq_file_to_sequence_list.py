@@ -21,11 +21,13 @@ def seq_list_from_fastq_file(fastq_filename):
     seq_list = list()
 
     ## begin your code
-
-
-
-
-    
+    n = 0
+    with open(fastq_filename, 'r') as f:
+        for line in f:
+            stripL = line.strip()
+            n += 1
+            if n % 4 == 2:  
+                seq_list.append(stripL)
     
     ## end your code
 

@@ -94,11 +94,56 @@ def main():
 
     ## end your code
 
+    #########################
+    ## calculate entropy for each kmer and add to dict
+    import math
+    entropys = {}
+    #n = 0
+    for kmer in kmer_count_dict.keys():
+        nucleotides = {'A':0, 'C':0, 'G':0, 'T':0}
+        for nucleotide in kmer:
+            if nucleotide in nucleotides:
+                nucleotides[nucleotide] += 1
+        entroA = nucleotides['A']/len(kmer)
+        #print(nucleotides['A'])
+        #print(entroA)
+        entroC = nucleotides['C']/len(kmer)
+        #print(nucleotides['C'])
+        #print(entroC)
+        entroG = nucleotides['G']/len(kmer)
+        #print(nucleotides['G'])
+        #print(entroG)
+        entroT = nucleotides['T']/len(kmer)
+        #print(nucleotides['T'])
+        #print(entroT)
+        lists = [entroA, entroC, entroG, entroT]
+        i = 0
+        while i < len(lists):
+            #print(lists[i])
+            if lists[i] != 0:
+                lists[i] = abs(lists[i] * math.log2(lists[i]))
+            else:
+                lists[i] = 0
+    
+            #print("after log")
+            #print(lists[i])
+            i = i + 1
+
+        #print(lists)
+        entropys[kmer] = lists[0] + lists[1] + lists[2] + lists[3]
+        #n = n + 1
+        #if n == 2:
+        #    break
+    
+    ## end entropy code
+
+
     ## printing the num top kmers to show
     top_kmers_show = unique_kmers[0:num_top_kmers_show]
 
     for kmer in top_kmers_show:
         print("{}: {}".format(kmer, kmer_count_dict[kmer]))
+        print("{}: {}".format(kmer, entropys[kmer]))
 
     sys.exit(0)  # always good practice to indicate worked ok!
 
